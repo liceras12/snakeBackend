@@ -10,7 +10,7 @@ namespace snake
     {
         public SnakeException(string message) : base(message)
         {
-
+           
         }
     }
 }

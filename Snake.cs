@@ -10,8 +10,6 @@ namespace snake
     {
         ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
         char key, dir;
-        //char key = 'w';
-        //char dir = 'u';
 
         public List<Position> snakeBody { get; set; }
 
