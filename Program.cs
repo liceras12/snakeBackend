@@ -18,6 +18,8 @@ namespace snake
                 try
                 {
                     map.drawMap();
+                    Console.SetCursorPosition(90, 5);
+                    Console.WriteLine("Score: " + snake.score);
                     snake.input();
                     food.drawFood();
                     snake.drawSnake();
@@ -40,6 +42,8 @@ namespace snake
                             
                             snake.x = 10;
                             snake.y = 10;
+                            snake.score = 0;
+                            snake.snakeBody.RemoveRange(0, snake.snakeBody.Count-1);
                             break;
                         case 'n':
                             finished = true;

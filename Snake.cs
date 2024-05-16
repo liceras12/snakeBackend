@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace snake
 {
@@ -13,15 +13,17 @@ namespace snake
         //char key = 'w';
         //char dir = 'u';
 
-        List<Position> snakeBody;
+        public List<Position> snakeBody { get; set; }
 
         public int x { get; set; }
         public int y { get; set; }
+        public int score { get; set; }
 
         public Snake()
         {
             x = 10;
             y = 10;
+            score = 0;
 
             snakeBody = new List<Position>();
             snakeBody.Add(new Position(x, y));
@@ -98,6 +100,7 @@ namespace snake
             {
                 snakeBody.Add(new Position(head.x, head.y));
                 f.foodNewLocation();
+                score++;
             }
         }
 
