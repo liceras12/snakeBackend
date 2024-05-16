@@ -9,12 +9,43 @@ namespace snake
             bool finished = false;
             Map map = new Map();
             Snake snake = new Snake();
+            Food food = new Food();
 
+            Console.WriteLine("Press Enter");
+            Console.Read();
             while (!finished)
             {
-                map.drawMap();
-                snake.drawSnake();
-                Console.Read();
+                try
+                {
+                    map.drawMap();
+                    snake.input();
+                    food.drawFood();
+                    snake.drawSnake();
+                    snake.moveSnake();
+                    snake.eat(food.foodLocation(), food);
+                    snake.collision();
+                    snake.hitWall(map);
+                }
+                catch (SnakeException e)
+                {
+                    Console.Clear();
+                    Console.WriteLine(e.Message);
+                    
+                    Console.WriteLine("Do you want to play again? (y/n)");
+                    char c = Console.ReadKey().KeyChar;
+
+                    switch (c)
+                    {
+                        case 'y':
+                            
+                            snake.x = 10;
+                            snake.y = 10;
+                            break;
+                        case 'n':
+                            finished = true;
+                            break;
+                    }
+                }
             }
         }
     }

@@ -9,8 +9,9 @@ namespace snake
     public class Snake
     {
         ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
-        char key = 'w';
-        char dir = 'u';
+        char key, dir;
+        //char key = 'w';
+        //char dir = 'u';
 
         List<Position> snakeBody;
 
@@ -19,8 +20,8 @@ namespace snake
 
         public Snake()
         {
-            x = 20;
-            y = 20;
+            x = 10;
+            y = 10;
 
             snakeBody = new List<Position>();
             snakeBody.Add(new Position(x, y));
@@ -39,13 +40,14 @@ namespace snake
         {
             if (Console.KeyAvailable)
             {
+                keyInfo = Console.ReadKey(true);
                 key = keyInfo.KeyChar;
             }
         }
 
         private void direction()
         {
-            if(key == 'w' && dir != 'd' )
+            if (key == 'w' && dir != 'd')
             {
                 dir = 'u';
             }
@@ -63,11 +65,11 @@ namespace snake
             }
         }
 
-        public void move()
+        public void moveSnake ()
         {
             direction();
 
-            if (dir == 'u'   )
+            if (dir == 'u')
             {
                 y--;
             }
@@ -83,8 +85,44 @@ namespace snake
             {
                 x--;
             }
+            snakeBody.Add(new Position(x, y));
+            snakeBody.RemoveAt(0);
+            Thread.Sleep(10);
         }
 
+        public void eat(Position food, Food f)
+        {
+            Position head = snakeBody[snakeBody.Count - 1];
+
+            if (head.x == food.x && head.y == food.y)
+            {
+                snakeBody.Add(new Position(head.x, head.y));
+                f.foodNewLocation();
+            }
+        }
+
+        public void collision()
+        {
+            Position head = snakeBody[snakeBody.Count - 1];
+
+            for (int i=0; i<snakeBody.Count - 2; i++)
+            {
+                Position snakeB = snakeBody[i];
+                if (head.x == snakeB.x && head.y == snakeB.y)
+                {
+                    throw new SnakeException("Game Over");
+                }
+            }
+        }
+
+        public void hitWall(Map map)
+        {
+            Position head = snakeBody[snakeBody.Count - 1];
+            if(head.x >= map.width || head.x <= 0 || head.y >= map.height || head.y <= 0)
+            {
+                throw new SnakeException("Game Over");
+            }
+        }
 
     }
 }

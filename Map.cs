@@ -13,8 +13,8 @@ namespace snake
 
         public Map()
         {
-            width = 100;
-            height = 100;
+            width = 70;
+            height = 20;
 
             Console.CursorVisible = false;
         }
