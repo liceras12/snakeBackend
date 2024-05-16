@@ -6,8 +6,16 @@ namespace snake
     {
         static void Main(string[] args)
         {
+            bool finished = false;
             Map map = new Map();
-            map.drawMap();
+            Snake snake = new Snake();
+
+            while (!finished)
+            {
+                map.drawMap();
+                snake.drawSnake();
+                Console.Read();
+            }
         }
     }
 }

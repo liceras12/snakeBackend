@@ -15,6 +15,8 @@ namespace snake
         {
             width = 100;
             height = 100;
+
+            Console.CursorVisible = false;
         }
 
         public void drawMap()
